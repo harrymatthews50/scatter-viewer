@@ -6,10 +6,7 @@ A simple Shiny app for visualizing 2D scatter plots (e.g., UMAP, t-SNE) with met
 
 - Load X,Y coordinate data from TSV files
 - Load metadata from TSV files
-- Color points by metadata columns:
-  - **Numerical (positive only)**: Viridis colormap
-  - **Numerical (diverging)**: Blue-white-red colormap for values with both positive and negative
-  - **Categorical**: Automatic categorical coloring (supports up to 30 categories)
+- Color points by metadata columns
 - Customizable hover information: Select which metadata fields to display on hover
 - Interactive plotly visualization with zoom, pan, and hover tooltip
 
@@ -29,7 +26,7 @@ conda create -n umap_viewer -c nodefaults -c conda-forge r-essentials r-base r-s
 Open R or RStudio and run:
 
 ```r
-install.packages(c("shiny", "shinyFiles", "plotly", "RColorBrewer", "viridis", "fs"))
+install.packages(c("shiny", "shinyFiles", "plotly", "RColorBrewer", "viridis"))
 ```
 
 ## Usage
@@ -91,12 +88,3 @@ Sample test files are included:
 4. Use **"Hover Info"** checkboxes to customize which metadata fields appear on hover
 5. Interact with the plot (zoom, pan, hover over points)
 
-## Requirements
-
-- R >= 4.0
-- shiny
-- shinyFiles
-- plotly
-- RColorBrewer
-- viridis
-- fs
