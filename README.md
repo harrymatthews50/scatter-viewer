@@ -100,7 +100,3 @@ Sample test files are included:
 - RColorBrewer
 - viridis
 - fs
-
-## License
-
-MIT
