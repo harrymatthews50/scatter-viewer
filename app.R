@@ -182,7 +182,6 @@ observeEvent(input$meta_file, {
     # Add color column if selected
     if (!is.null(meta) && !is.null(input$color_column) && input$color_column != "") {
       color_col <- meta[[input$color_column]]
-      plot_data$color_val <- color_col
       
       # Determine color scale
       if (is.numeric(color_col)) {
@@ -191,7 +190,7 @@ observeEvent(input$meta_file, {
           log_coordinate_plot("using diverging numeric color scale")
           # Diverging colormap
           p <- plot_ly(plot_data, x = ~X, y = ~Y, type = "scatter", mode = "markers",
-                       color = ~color_val, colors = colorRamp(c("blue", "white", "red")),
+                       color = ~color_val, colors = colorRampPalette(c("blue", "white", "red"))(100),
                        marker = list(size = 5))
         } else {
           log_coordinate_plot("using sequential numeric color scale")
@@ -202,15 +201,20 @@ observeEvent(input$meta_file, {
         }
       } else {
         # Categorical colormap
-        n_categories <- length(unique(color_col))
+        color_factor <- factor(ifelse(is.na(color_col), "(NA)", as.character(color_col)))
+        n_categories <- nlevels(color_factor)
         log_coordinate_plot(sprintf("using categorical color scale with %d categories", n_categories))
-        if (n_categories <= 12) {
-          colors <- brewer.pal(min(n_categories, 12), "Set3")
+        if (n_categories <= 36) {
+          colors <- Polychrome::palette36.colors(n_categories)
+          names(colors) <- levels(color_factor)
         } else {
-          colors <- rainbow(min(n_categories, 30))
+          colors <- grDevices::hcl.colors(n_categories, palette = "Dark 3")
+          names(colors) <- levels(color_factor)
+          log_coordinate_plot("category count > 36; using hcl.colors fallback palette")
         }
+        plot_data$color_val <- color_factor
         p <- plot_ly(plot_data, x = ~X, y = ~Y, type = "scatter", mode = "markers",
-                     color = ~as.factor(color_val), colors = colors,
+                     color = ~color_val, colors = colors,
                      marker = list(size = 5))
       }
     } else {

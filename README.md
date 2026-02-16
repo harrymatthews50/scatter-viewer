@@ -17,7 +17,7 @@ A simple Shiny app for visualizing 2D scatter plots (e.g., UMAP, t-SNE) with met
 Create a conda environment with R and required packages:
 
 ```bash
-conda create -n umap_viewer -c nodefaults -c conda-forge r-essentials r-base r-shinyfiles r-shiny r-plotly r-rcolorbrewer r-viridis r-arrow
+conda create -n umap_viewer -c nodefaults -c conda-forge r-essentials r-base r-shinyfiles r-shiny r-plotly r-rcolorbrewer r-viridis r-arrow r-polychrome
 
 ```
 
@@ -26,7 +26,7 @@ conda create -n umap_viewer -c nodefaults -c conda-forge r-essentials r-base r-s
 Open R or RStudio and run:
 
 ```r
-install.packages(c("shiny", "shinyFiles", "plotly", "RColorBrewer", "viridis", "arrow"))
+install.packages(c("shiny", "shinyFiles", "plotly", "RColorBrewer", "viridis", "arrow", "polychrome"))
 ```
 
 ## Usage
